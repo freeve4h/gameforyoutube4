@@ -5,6 +5,7 @@ function Thing:load()
     Thing.ypos = math.random(0, 600 - 32)
     Thing.Width = 32
     Thing.Height = 32 
+    Thing.image = love.graphics.newImage("thing.png")
 end
 
 function Thing:update(dt)
@@ -16,7 +17,5 @@ function Thing:update(dt)
 end
 
 function Thing:draw() 
-    love.graphics.setColor(0, 1, 0)
-    love.graphics.rectangle("fill", Thing.xpos, Thing.ypos, Thing.Width, Thing.Height)
-    love.graphics.setColor(1, 1, 1)
+    love.graphics.draw(Thing.image, Thing.xpos, Thing.ypos)
 end

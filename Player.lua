@@ -6,26 +6,43 @@ function Player:load()
     Player.Width = 32
     Player.Height = 32
     Player.Speed = 400
+    Player.Image = love.graphics.newImage("Player.png")
 end
 
 function Player:update(dt)
-    if love.keyboard.isDown("up") then 
-        Player.ypos = Player.ypos - Player.Speed * dt 
+    if Thing.xpos < Player.xpos then 
+        Player:left(dt)
     end
-    if love.keyboard.isDown("down") then 
-        Player.ypos = Player.ypos + Player.Speed * dt 
+    if Thing.xpos > Player.xpos then 
+        Player:right(dt)
     end
-    if love.keyboard.isDown("left") then 
-        Player.xpos = Player.xpos - Player.Speed * dt 
+    if Thing.ypos < Player.ypos then 
+        Player:up(dt)
     end
-    if love.keyboard.isDown("right") then 
-        Player.xpos = Player.xpos + Player.Speed * dt
+    if Thing.ypos > Player.ypos then 
+        Player:down(dt)
     end
     Player:Bounds()
 end
 
+function Player:up(dt)
+    Player.ypos = Player.ypos - Player.Speed * dt 
+end
+
+function Player:down(dt)
+    Player.ypos = Player.ypos + Player.Speed * dt 
+end
+
+function Player:left(dt)
+    Player.xpos = Player.xpos - Player.Speed * dt 
+end
+
+function Player:right(dt)
+    Player.xpos = Player.xpos + Player.Speed * dt
+end
+
 function Player:draw()
-    love.graphics.rectangle("fill", Player.xpos, Player.ypos, Player.Width, Player.Height)
+    love.graphics.draw(Player.Image, Player.xpos, Player.ypos)
 end
 
 function Player:Bounds()
